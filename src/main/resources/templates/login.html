@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Log in</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body class="bg-light">
+
+<div class="container">
+
+  <div class="py-5 text-center">
+    <h2>Log in</h2>
+  </div>
+
+  <div class="row">
+    <div th:if="${param.error}" class="alert alert-danger" role="alert">
+      Invalid username and password.
+    </div>
+    <div th:if="${param.logout}" class="alert alert-info" role="alert">
+      You have been logged out.
+    </div>
+
+    <div class="col-md-12 order-md-1">
+      <form th:action="@{/login}" method="post" class="needs-validation" novalidate>
+        <div class="mb-3">
+          <label for="username">Username</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="password">Password</label>
+          <div class="input-group">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Log In</button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">&copy; 2019 Company Name</p>
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,179 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: madisp
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: username
+                  type: VARCHAR(32)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: password
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: enabled
+                  type: BOOLEAN
+                  defaultValue: true
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: authorities
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: username
+                  type: VARCHAR(32)
+                  constraints:
+                    nullable: false
+                    constraints:
+                      references: users(username)
+                      foreignKeyName: fk_client_country_id
+              - column:
+                  name: authority
+                  type: VARCHAR(32)
+                  constraints:
+                    nullable: false
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: user1
+              - column:
+                  name: password
+                  # 1234
+                  value: $2a$10$DPHeZJM7mAR47eNPc/Oxt.iePlpzLzj39qYSXvqwraS.MbcOI.i7W
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: user2
+              - column:
+                  name: password
+                  # password
+                  value: $2a$10$XPBSS0gdkqKGKtfKNskZOOnDNLEov8neM6DlyRFnLeGEJ/./P9fbS
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: user3
+              - column:
+                  name: password
+                  # lammas
+                  value: $2a$10$R.TDwDMNLjCQEz/ApfrwWOuzZpnhUANnFGe/fkpvZFLVm.pcbHjja
+
+
+  - changeSet:
+      id: 2
+      author: madisp
+      changes:
+        - createTable:
+            tableName: country
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(64)
+                  constraints:
+                    nullable: false
+                    unique: true
+
+        - createTable:
+            tableName: client
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: first_name
+                  type: VARCHAR(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: VARCHAR(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: username
+                  type: VARCHAR(32)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: email
+                  type: VARCHAR(64)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: address
+                  type: VARCHAR(256)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: country_id
+                  type: bigint
+                  constraints:
+                    references: country(id)
+                    foreignKeyName: fk_client_country_id
+
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: Estonia
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: Latvia
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: Lithuania
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: Finland
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: Sweden
+
+
