@@ -1,6 +1,6 @@
 # Solution for Srini homework assignment
 
-Build with: `mvn clean package`
+Build with: `./mvnw clean package`
 
 Run with: `java -jar api/target/api-1.0-SNAPSHOT.jar`
 
