@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/api/client")
 public class ClientController {
 
 	private final ClientDao dao;
@@ -60,22 +61,22 @@ public class ClientController {
 				.collect(Collectors.toMap(Entry::getKey, Entry::getValue));
 	}
 
-  @RequestMapping(value = "/client", method = GET)
+  @RequestMapping(value = "", method = GET)
   public List<Client> list(Principal user) {
     return dao.getAll(user);
   }
 
-  @RequestMapping(value = "/client/{id}", method = GET)
+  @RequestMapping(value = "/{id}", method = GET)
   public Client findById(Principal user, @PathVariable long id) {
 		return dao.findById(id, user);
   }
 
-	@RequestMapping(value = "/client", method = PUT)
+	@RequestMapping(value = "", method = PUT)
 	public void update(Principal user, @RequestBody @Valid Client client) {
 		dao.update(client, user);
 	}
 
-	@RequestMapping(value = "/client", method = POST)
+	@RequestMapping(value = "", method = POST)
 	public Client create(Principal user, @RequestBody @Valid Client client) {
 		return dao.create(client, user);
 	}

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping(value = "/api/country")
 public class CountryController {
 
   private final CountryDao dao;
@@ -16,7 +17,7 @@ public class CountryController {
     this.dao = dao;
   }
 
-  @RequestMapping(value = "/country", method = GET)
+  @RequestMapping(value = "", method = GET)
   public List<Country> list() {
     return dao.getAll();
   }

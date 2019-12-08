@@ -96,7 +96,7 @@ public class ClientControllerTest {
   public void canNotFetchOtherClientById() throws Exception {
     Client client = randomClient(userToken("user2"));
 
-    mockMvc.perform(get("/client/" + client.getId())
+    mockMvc.perform(get("/api/client/" + client.getId())
         .with(user("other_user3")))
         .andExpect(status().isNotFound())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON));
@@ -112,7 +112,7 @@ public class ClientControllerTest {
         .countryId(2L)
         .build();
 
-    mockMvc.perform(put("/client")
+    mockMvc.perform(put("/api/client")
         .with(user("user2"))
         .with(csrf())
         .contentType(MediaType.APPLICATION_JSON)
@@ -131,7 +131,7 @@ public class ClientControllerTest {
         .lastName(new Faker().name().lastName())
         .build();
 
-    mockMvc.perform(put("/client")
+    mockMvc.perform(put("/api/client")
         .with(user("other_user3"))
         .with(csrf())
         .contentType(MediaType.APPLICATION_JSON)
@@ -147,7 +147,7 @@ public class ClientControllerTest {
         .lastName(new Faker().lorem().fixedString(65))
         .build();
 
-    byte[] result = mockMvc.perform(put("/client")
+    byte[] result = mockMvc.perform(put("/api/client")
         .with(user("user2"))
         .with(csrf())
         .contentType(MediaType.APPLICATION_JSON)
@@ -188,7 +188,7 @@ public class ClientControllerTest {
   }
 
   private ResultActions createClientRequest(Client client, Principal user) throws Exception {
-    return mockMvc.perform(post("/client")
+    return mockMvc.perform(post("/api/client")
         .content(json.writeValueAsBytes(client))
         .contentType(MediaType.APPLICATION_JSON)
         .with(user(user.getName()))
@@ -201,7 +201,7 @@ public class ClientControllerTest {
   }
 
   private List<Client> getClients(Principal user) throws Exception {
-    byte[] result = mockMvc.perform(get("/client")
+    byte[] result = mockMvc.perform(get("/api/client")
         .with(user(user.getName())))
         .andExpect(status().isOk())
         .andReturn()
@@ -214,7 +214,7 @@ public class ClientControllerTest {
   }
 
   private Client getClient(long id, Principal user) throws Exception {
-    byte[] result = mockMvc.perform(get("/client/" + id)
+    byte[] result = mockMvc.perform(get("/api/client/" + id)
         .with(user(user.getName())))
         .andExpect(status().isOk())
         .andReturn()

@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="py-5 text-center">
+    <h2>Clients</h2>
+  </div>
+
+  <div class="row">
+    <a routerLink="/create" class="btn btn-primary">Add client</a>
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Username</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let ct of clients | async">
+        <th scope="row">{{ct.id}}</th>
+        <td>{{ct.firstName}}</td>
+        <td>{{ct.lastName}}</td>
+        <td>{{ct.username}}</td>
+        <td>
+          <a routerLink="/edit/{{ct.id}}" class="btn btn-primary">Edit client</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<footer class="my-5 pt-5 text-muted text-center text-small">
+  <p class="mb-1">&copy; 2019 Company Name</p>
+</footer>

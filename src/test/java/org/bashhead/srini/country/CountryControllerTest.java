@@ -31,14 +31,14 @@ public class CountryControllerTest {
 
   @Test
   public void requiresAuthentication() throws Exception {
-    mockMvc.perform(get("/country"))
+    mockMvc.perform(get("/api/country"))
         .andExpect(status().isFound())
         .andExpect(redirectedUrlPattern("**/login"));
   }
 
   @Test
   public void shouldReturnListOfCountries() throws Exception {
-    byte[] result = mockMvc.perform(get("/country").with(user("random_user")))
+    byte[] result = mockMvc.perform(get("/api/country").with(user("random_user")))
         .andExpect(status().isOk())
         .andReturn()
         .getResponse()
