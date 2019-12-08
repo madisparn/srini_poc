@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
-import {Router} from "@angular/router";
-import {ClientDTO} from "./model";
+import {Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
+import {ClientDTO} from './model';
 
 @Component({
-  selector: 'client-list',
+  selector: 'app-client-list',
   templateUrl: './clients-list.component.html',
 })
 export class ClientsListComponent implements OnInit  {
@@ -13,7 +13,7 @@ export class ClientsListComponent implements OnInit  {
   constructor(private httpClient: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
-    this.clients = this.getClients()
+    this.clients = this.getClients();
   }
 
   private getClients(): Observable<Array<ClientDTO>> {

@@ -1,2 +1,2 @@
-export * from './ClientDTO'
-export * from './CountryDTO'
+export * from './ClientDTO';
+export * from './CountryDTO';

@@ -1,12 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from "rxjs";
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {ActivatedRoute, Router} from "@angular/router";
-import {ClientDTO, CountryDTO} from "./model";
-import {catchError} from "rxjs/operators";
+import {Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ClientDTO, CountryDTO} from './model';
 
 @Component({
-  selector: 'client-edit',
+  selector: 'app-client-edit',
   templateUrl: './client-edit.component.html',
 })
 export class ClientEditComponent implements OnInit {
@@ -27,24 +26,23 @@ export class ClientEditComponent implements OnInit {
 
   saveClient(): void {
     const url = '/api/client';
-    let req : Observable<ClientDTO>;
+    let req: Observable<ClientDTO>;
     if (!this.client.id) {
       req = this.httpClient.post<ClientDTO>(url, this.client);
-    }
-    else {
+    } else {
       req = this.httpClient.put<ClientDTO>(url, this.client);
     }
 
     req.subscribe(response => {
-      this.error = null;
-      this.routes.navigateByUrl(`/edit/${response.id}`)
+        this.error = null;
+        this.routes.navigateByUrl(`/edit/${response.id}`);
       },
-      error => this.error = JSON.stringify(error.error));
+      error => this.error = JSON.stringify(error.error)
+    );
   }
 
   private getClient(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    console.log("client Id: " + id);
     if (!id) {
       this.client = {};
       return;
