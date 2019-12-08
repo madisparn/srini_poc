@@ -1,13 +1,17 @@
-package org.bashhead.srini;
+package org.bashhead.srini.client.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlTransient;
+import lombok.Builder;
 import lombok.Value;
 
 @Value
+@JsonDeserialize(builder = Client.ClientBuilder.class)
+@Builder(toBuilder = true)
 public class Client {
 
   private Long id;
@@ -28,7 +32,8 @@ public class Client {
   @NotNull
   private Long countryId;
 
-  @XmlTransient
-  private String assignee;
+  @JsonPOJOBuilder(withPrefix = "")
+  public static class ClientBuilder {
+  }
 
 }

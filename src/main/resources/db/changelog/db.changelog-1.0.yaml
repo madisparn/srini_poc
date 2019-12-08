@@ -81,6 +81,33 @@ databaseChangeLog:
                   name: password
                   # lammas
                   value: $2a$10$R.TDwDMNLjCQEz/ApfrwWOuzZpnhUANnFGe/fkpvZFLVm.pcbHjja
+        - insert:
+            tableName: authorities
+            columns:
+              - column:
+                  name: username
+                  value: user1
+              - column:
+                  name: authority
+                  value: ROLE_USER
+        - insert:
+            tableName: authorities
+            columns:
+              - column:
+                  name: username
+                  value: user2
+              - column:
+                  name: authority
+                  value: ROLE_USER
+        - insert:
+            tableName: authorities
+            columns:
+              - column:
+                  name: username
+                  value: user3
+              - column:
+                  name: authority
+                  value: ROLE_USER
 
 
   - changeSet:
@@ -142,8 +169,17 @@ databaseChangeLog:
                   name: country_id
                   type: bigint
                   constraints:
+                    nullable: false
                     references: country(id)
                     foreignKeyName: fk_client_country_id
+              - column:
+                  name: assignee
+                  type: VARCHAR(32)
+                  constraints:
+                    nullable: false
+                    references: users(username)
+                    foreignKeyName: fk_client_assignee
+
 
         - insert:
             tableName: country

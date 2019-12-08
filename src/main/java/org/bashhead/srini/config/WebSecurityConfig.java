@@ -1,14 +1,11 @@
 package org.bashhead.srini.config;
 
-import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -47,11 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	@Override
 	public UserDetailsService userDetailsService() {
-		JdbcDaoImpl dao = new JdbcDaoImpl() {
-			protected void addCustomAuthorities(String username, List<GrantedAuthority> authorities) {
-				authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-			}
-		};
+		JdbcDaoImpl dao = new JdbcDaoImpl();
 		dao.setDataSource(datasource);
 		return dao;
 	}
