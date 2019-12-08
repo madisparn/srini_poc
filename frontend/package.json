@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json",
-    "build": "ng build --prod --progress --build-optimizer --delete-output-path --base-href /ui/ --output-path target/resources/static/ui",
+    "build": "ng build --prod --progress --build-optimizer --base-href / --output-path target/resources/static",
     "test": "ng test",
     "lint": "ng lint"
   },

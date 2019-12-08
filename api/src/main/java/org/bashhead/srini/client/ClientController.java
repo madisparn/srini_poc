@@ -72,8 +72,9 @@ public class ClientController {
   }
 
 	@RequestMapping(value = "", method = PUT)
-	public void update(Principal user, @RequestBody @Valid Client client) {
+	public Client update(Principal user, @RequestBody @Valid Client client) {
 		dao.update(client, user);
+		return client;
 	}
 
 	@RequestMapping(value = "", method = POST)
