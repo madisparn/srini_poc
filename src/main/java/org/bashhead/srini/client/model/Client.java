@@ -3,9 +3,9 @@ package org.bashhead.srini.client.model;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Value;
 
@@ -16,24 +16,25 @@ public class Client {
 
   private Long id;
   @NotBlank
-  @Max(64)
+  @Size(max = 64)
   private String firstName;
   @NotBlank
-  @Max(64)
+  @Size(max = 64)
   private String lastName;
   @NotBlank
-  @Max(32)
+  @Size(max = 32)
   private String username;
   @Email
-  @Max(64)
+  @Size(max = 64)
   private String email;
-  @Max(256)
+  @Size(max = 256)
   private String address;
   @NotNull
   private Long countryId;
 
   @JsonPOJOBuilder(withPrefix = "")
   public static class ClientBuilder {
+
   }
 
 }

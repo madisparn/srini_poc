@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import javax.sql.DataSource;
 import org.bashhead.srini.client.model.Client;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -57,10 +58,13 @@ public class ClientDao {
         + "username = :username, "
         + "email = :email, "
         + "address = :address, "
-        + "country_id = :country_id, "
+        + "country_id = :country_id "
         + "where id = :id and assignee = :assignee";
-    jdbc.update(sql, clientParameters(client)
+    int count = jdbc.update(sql, clientParameters(client)
         .addValue("assignee", user.getName()));
+    if (count == 0) {
+      throw new EmptyResultDataAccessException(1);
+    }
   }
 
   public Client create(Client client, Principal user) {
@@ -80,6 +84,7 @@ public class ClientDao {
 
   private MapSqlParameterSource clientParameters(Client client) {
     return new MapSqlParameterSource()
+        .addValue("id", client.getId())
         .addValue("first_name", client.getFirstName())
         .addValue("last_name", client.getLastName())
         .addValue("username", client.getUsername())
