@@ -80,7 +80,7 @@ databaseChangeLog:
               - column:
                   name: password
                   # lammas
-                  value: $2a$10$R.TDwDMNLjCQEz/ApfrwWOuzZpnhUANnFGe/fkpvZFLVm.pcbHjja
+                  value: $2a$10$vsQddDt8gJO6iq7kh0sc6uGIsD/6ewYZAXwKWw5OGicr799pC1I3C
         - insert:
             tableName: authorities
             columns:
